@@ -67,11 +67,11 @@ soi.ses.year =  soi.ses %>%
   dplyr::summarise(Mean = mean(SOI, na.rm=TRUE))
 
 ## Save Plot 
-# pdf("./plots/SOI1950s.pdf",
-#    useDingbats = FALSE, width = 10, height = 7)
+ pdf("./plots/FigureS5.pdf",
+    useDingbats = FALSE, width = 10, height = 7)
 plot(soi.ses.year$Year, soi.ses.year$Mean, type = "b", xlab = "Year", ylab = "SOI Index", pch = 16) 
 abline(h = 0)
-# dev.off()
+dev.off()
 
 
 # SAM
@@ -89,20 +89,20 @@ sam.ses.year =  sam.ses %>%
   dplyr::summarise(Mean = mean(AAO, na.rm=TRUE))
 
 ## Save Plot 
-# pdf("./plots/SAM1980s.pdf",
-#     useDingbats = FALSE, width = 10, height = 7)
+pdf("./plots/FigureS6.pdf",
+     useDingbats = FALSE, width = 10, height = 7)
 plot(sam.ses.year$Year, sam.ses.year$Mean, type = "b", xlab = "Year", ylab = "SAM Index", pch = 16)
 abline(h = 0)
-#dev.off()
+dev.off()
 
 # add female population size on 15 October
 popN <- read.csv("./data/ses_15_oct_counts.csv")  # import total island count data
 head(popN)
 
 ## Save Plot 
-# pdf("./plots/PopN.pdf",
-#     useDingbats = FALSE, width = 10, height = 7)
+pdf("./plots/FigureS4.pdf",
+     useDingbats = FALSE, width = 10, height = 7)
 plot(popN$year, popN$N, type = "b", xlab = "Year", ylab = "Peak breeding season count", pch = 16)
 abline(h = 0)
-# dev.off()
+dev.off()
 

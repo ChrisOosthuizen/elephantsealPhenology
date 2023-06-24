@@ -445,11 +445,11 @@ xhist.arrival
 p2 <- insert_xaxis_grob(dc, xhist.arrival, grid::unit(1, "in"), position = "top")
 ggdraw(p2)
 
-# ## Save Plot 
-# pdf("./plots/discovery curve_median arrival date histogram.pdf",
-#     useDingbats = FALSE, width = 6, height = 5)
-# ggdraw(p2)
-# dev.off()
+## Save Plot 
+ pdf("./plots/FigureS3.pdf",
+     useDingbats = FALSE, width = 6, height = 5)
+ ggdraw(p2)
+ dev.off()
 
 #-----------------------------------------
 ##### Model covariates ####
@@ -464,6 +464,16 @@ names(cov) = c('SOI', 'SAM', 'Pop.N', 'Linear.trend', 'Moult.date', 'Wean.date',
 GGally::ggcorr(cov, nbreaks = 10, label = T, low = "red3", high = "green3", method = c("pairwise", "pearson"),
        label_round = 2, name = "Correlation Scale", label_alpha = F, hjust = 0.75, label_size = 6,
        legend.size = 16, size = 6)
+
+
+## Save Plot 
+pdf("./plots/FigureS7.pdf",
+     useDingbats = FALSE, width = 9, height = 9)
+GGally::ggcorr(cov, nbreaks = 10, label = T, low = "red3", high = "green3", method = c("pairwise", "pearson"),
+               label_round = 2, name = "Correlation Scale", label_alpha = F, hjust = 0.75, label_size = 6,
+               legend.size = 16, size = 6)
+dev.off()
+
 
 #-----------------------------------------
 ##### Model selection ####
@@ -934,11 +944,11 @@ g2 = g2 +
 
 g2 
 
-# ## Save Plot 
-# pdf("./plots/2022_Age class and state model predictions with linear slope.pdf",
-#     useDingbats = FALSE, width = 4, height = 4)
-# print(g2)
-# dev.off()
+## Save Plot 
+pdf("./plots/Figure4.pdf",
+     useDingbats = FALSE, width = 4, height = 4)
+print(g2)
+dev.off()
 
 # ====================================================================================
 # Figure: Wean trend with geom_hex
@@ -1113,15 +1123,15 @@ cowplot::plot_grid(fig_wean,
                   nrow = 1,
                   align = "v")
 
-# ## Save Plot 
-# pdf("./plots/2023_cowplot_geomhex_wean and moult.pdf",
-#     useDingbats = FALSE, width = 8, height = 4.5)
-# cowplot::plot_grid(fig_wean, 
-#                    fig_moult,   
-#                    labels = "AUTO",
-#                    nrow = 1,
-#                    align = "v")
-# dev.off()
+## Save Plot 
+pdf("./plots/Figure2.pdf",
+     useDingbats = FALSE, width = 8, height = 4.5)
+ cowplot::plot_grid(fig_wean, 
+                    fig_moult,   
+                    labels = "AUTO",
+                    nrow = 1,
+                    align = "v")
+dev.off()
 
 #=============================================================================
 #----------------------------------------------------------------------------------------------------
@@ -1210,11 +1220,11 @@ fig_first = g
 # Save png to disk
 # ggsave("./plots/2022_geom_hex_First breeding predictions.png", device = 'png', width = 4, height = 4, dpi = 600, units = 'in', limitsize = T)
 # 
-# ## Save Plot 
-# pdf("./plots/2022_geom_hex_First breeding predictions fig 5.pdf",
-#     useDingbats = FALSE, width = 4, height = 4)
-# print(fig_first)
-# dev.off()
+## Save Plot 
+pdf("./plots/Figure5.pdf",
+     useDingbats = FALSE, width = 4, height = 4)
+print(fig_first)
+dev.off()
 
 
 # ====================================================================================
@@ -1331,12 +1341,12 @@ gg
 
 
 ## Save Plot 
-# pdf("./plots/2022 random effect plot.pdf",
-#     useDingbats = FALSE, width = 9, height = 5.5)
-# cowplot::plot_grid( gg,ry, labels = "AUTO",
-#                    nrow = 1,
-#                    align = "v")
-# dev.off()
+pdf("./plots/Figure3.pdf",
+     useDingbats = FALSE, width = 9, height = 5.5)
+cowplot::plot_grid( gg,ry, labels = "AUTO",
+                    nrow = 1,
+                    align = "v")
+dev.off()
 
 # Now subset predicted values per cohort
 g83 = tags1moult %>% dplyr::filter(between(birthyear, 1983, 1989))
@@ -1481,20 +1491,20 @@ cowplot::plot_grid(gg83,
                    align = "v")
 
 
-# ## Save Plot 
-# pdf("./plots/2022 random effect slopes_6 figures.pdf",
-#     useDingbats = FALSE, width = 8, height = 10)
-# 
-# cowplot::plot_grid(gg83,
-#                    gg90,
-#                    gg95,
-#                    gg00,
-#                    gg05,
-#                    gg10,
-#                    labels = "AUTO",
-#                    nrow = 3,
-#                    align = "v")
-# dev.off()
+## Save Plot
+pdf("./plots/FigureS9.pdf",
+    useDingbats = FALSE, width = 8, height = 10)
+
+cowplot::plot_grid(gg83,
+                   gg90,
+                   gg95,
+                   gg00,
+                   gg05,
+                   gg10,
+                   labels = "AUTO",
+                   nrow = 3,
+                   align = "v")
+dev.off()
 
 
 #-----------------------------------------------------------------------------------------
@@ -1546,7 +1556,7 @@ plot(adj.rpt, grname = "ID", scale= "link", cex.main=0.8, main= "ID variance", l
 # Heritability in arrival date
 #---------------------------------------------------------------------------------------------
 
-# import mother-pup association data from supersmall (ss) records 
+# now import mother-pup association data from supersmall records
 ss <- read.csv("./data/mom_pup.csv")  
 head(ss)
 
@@ -1575,10 +1585,7 @@ n_distinct(ss$pupID) # all pup IDs are unique (good)
 # assign new names to merge by ID:
 names(ss) = c("ID", "pup")
 
-# get wean date for moms. Here I read in the 'tags' dataframe. You can also read in the 
-# tags1moult dataframe, which was used for analysis above. But, this considers the moult
-# also, and we lose 5 females who were not seen in the moult prior to breeding. Thus,
-# we make better use of all data for heritability by using 'tags'
+# get wean date for moms
 m <- merge(y = ss, x = tags, by = "ID", all = F)
 dim(m)
 
@@ -1596,18 +1603,140 @@ p <- merge(y = mm, x = tags, by = "ID", all = F)
 dim(p)
 
 head(p)
-
 ## clean up slightly 
 pp =  p %>% dplyr::select(c(ID,  wean.date,  first.breeding.date , momID , mom.wean, mom.first, mom.birthyear, birthyear, AFB.m, AFB ))
+
 head(pp)
 names(pp) = c("pupID", "pupwean", "pup.first", "momID", "momwean", "mom.first","mom.birthyear","pup.birthyear", "AFB.m","AFB.pup")
 head(pp)
 dim(pp)
-
 pp = pp[!duplicated(pp[c(1)]),]
 dim(pp)
 
-as.data.frame(pp)  # this is OK
+# ===========================================================================================
+# Falconer Page 168
+# Calculating heritability regression on the mean parent and the mean offspring values
+# rather than each of the individual values
+# ===========================================================================================
+
+# Are there females with more than 1 pup in the heritability data?
+n_distinct(pp$momID)  
+
+# yes, the pp df is 216 rows long (there is 216 mom-pup records)
+# but the unique df is only 187 records, meaning that some females have more than
+# one pup in this data. Calculate the mean parent and mean offspring arrival dates 
+# as done by Falconer
+
+216 - 187
+
+N = pp %>% 
+  group_by(momID) %>% 
+  tally()
+
+table(N$n)
+
+Falconer = pp %>% 
+  group_by(momID) %>% 
+  mutate(pups.ave = mean(pup.first)) %>%
+  mutate(moms.ave = mean(mom.first)) %>%
+  distinct(momID, .keep_all = TRUE) %>%
+  ungroup()
+
+Falconer   #same nr of rows as unique moms
+
+mean(Falconer$pup.first)
+mean(Falconer$mom.first)
+
+#linear model
+lm.fit.Falconer = lm(pups.ave ~ moms.ave, data =  Falconer)
+summary(lm.fit.Falconer)
+anova(lm.fit.Falconer)
+
+plot(Falconer$pups.ave, Falconer$moms.ave, xlim = c(250,330), ylim = c(250,330))
+abline(coef = c(0,1))
+abline(lm.fit.Falconer, lwd=2, col="red")
+
+#add sample size to Flaconer data (records where there are more than 1 mom-pup pair with
+# the same dates)
+
+samplesize = Falconer %>% 
+  group_by(pups.ave, moms.ave) %>%
+  mutate(n= n()) %>% 
+  distinct(pupID, .keep_all=TRUE)
+
+samplesize   # same nr of rows as Falconer
+table(samplesize$n)  # 20 records are the same date (?)
+
+#h.plot = ggplot(data = Falconer, aes(x = pups.ave, y = moms.ave)) + 
+h.plot = ggplot(data = samplesize, aes(x = pups.ave, y = moms.ave, color = as.factor(n))) + 
+  geom_point(#position=position_jitter(h=0.1, w=0.1),
+    #color = "tan2", alpha = 0.5, shape = 15, size = 1.5) +
+    alpha = 0.9, shape = 15, size = 1.5) +
+  scale_colour_manual(values = c("#4daf4a", "#984ea3"))+
+  scale_y_continuous(breaks = c(seq(250,310, by = 10)), 
+                     labels =c("07 Sep","17 Sep","27 Sep","07 Oct","17 Oct","27 Oct","06 Nov"),
+                     limits = c(245, 320))+
+  scale_x_continuous(breaks = c(seq(250,318, by = 10)), 
+                     labels =c("07 Sep","17 Sep","27 Sep","07 Oct","17 Oct","27 Oct","06 Nov"),
+                     limits = c(250, 308)) + 
+  gg_theme() + 
+  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust = 0))+
+  theme(legend.position = "top")+
+  xlab("Daughter arrival date") +
+  ylab("Mother arrival date") +
+  geom_ribbon(stat='smooth', method = "lm",  fill = NA,  outline.type = 'both',
+              aes(), color = 'black', size = 0.8, linetype = "twodash" )+
+  geom_line(stat='smooth', method = "lm", alpha = 1 ,color = "black", size = 1.2)
+
+h.plot
+
+n_distinct(Falconer$pups.ave)  # there is overlap of points
+n_distinct(Falconer$moms.ave)  # there is overlap of points
+
+
+# t = subset(samplesize, samplesize$n == 2)
+# 20 records are duplicate, thus it is 10 pairs. Thus, on the graph, there is only 10
+# purple blocks. Correct.
+
+sort(samplesize$moms.ave)
+
+# This plot excludes 3 records with mom arrival dates after 1 November
+# and it excludes 1 record with a mom arrival date of 6 Sept. 
+
+h.plot = ggplot(data = samplesize, aes(x = moms.ave,  y = pups.ave, color = as.factor(n))) + 
+  geom_point(#position=position_jitter(h=0.1, w=0.1),
+    #color = "tan2", alpha = 0.5, shape = 15, size = 1.5) +
+    alpha = 0.95, shape = 15, size = 1.5) +
+  scale_colour_manual(values = c('orangered', '#440154FF'))+
+  scale_y_continuous(breaks = c(seq(250,310, by = 10)), 
+                     labels =c("07 Sep","17 Sep","27 Sep","07 Oct","17 Oct","27 Oct","06 Nov"),
+                     limits = c(252, 305))+
+  scale_x_continuous(breaks = c(seq(250,318, by = 10)), 
+                     labels =c("07 Sep","17 Sep","27 Sep","07 Oct","17 Oct","27 Oct","06 Nov"),
+                     limits = c(255, 305)) + 
+  gg_theme() + 
+  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust = 0))+
+  # theme(legend.position=c(0.1, 0.87), legend.title = element_blank())+
+  theme(legend.position = "none") +
+  # legend position inside the plot is given as between (0 and 1), not on the real axis scale
+  xlab("Mother arrival date") +
+  ylab("Daughter arrival date") +
+  geom_ribbon(stat='smooth', method = "lm",  fill = NA,  outline.type = 'both',
+              aes(), color = 'black', size = 0.8, linetype = "twodash" )+
+  geom_line(stat='smooth', method = "lm", alpha = 1 ,color = "black", size = 1.2)
+
+h.plot
+
+## Save Plot 
+pdf("./plots/Figure6.pdf",
+    useDingbats = FALSE, width = 5.5, height = 5.5)
+print(h.plot)
+dev.off()
+
+plot(samplesize$moms.ave, samplesize$pups.ave)
+abline(lm.fit.Falconer, lwd=2, col="red")
+
+#==============================================================================================
 
 #----------------------------------------------
 # Sanity check
@@ -1619,24 +1748,91 @@ as.data.frame(pp)  # this is OK
 # Sanity check passed
 #----------------------------------------------
 
-# plot pup and mom arrival dates
+###
 plot(pp$pup.first, pp$mom.first, xlim = c(250,330), ylim = c(250,330))
 abline(coef = c(0,1))
 
-#linear model R2
+# correlation?
+r = cor(pp$pup.first, pp$mom.first)
+r
+
+#linear model R2?
 lm.fit = lm(pp$pup.first ~  pp$mom.first)
 summary(lm.fit)
 
 R2 = summary(lm.fit)$r.squared     # names(summary(lm.fit)) gives you the variables you can extract
 
+# now extract the model p value:
+lmp <- function (modelobject) {
+  if (class(modelobject) != "lm") stop("Not an object of class 'lm' ")
+  f <- summary(modelobject)$fstatistic
+  p <- pf(f[1],f[2],f[3],lower.tail=F)
+  attributes(p) <- NULL
+  return(p)
+}
+
+lmp(lm.fit)
+
+
+# Print results
+cat("Correlation coefficient = ", r)
+## Correlation coefficient =  0.8068949
+cat("Square of corr. coef. = ", r*r)
+## Square of corr. coef. =  0.6510794
+cat("Coefficient of determination= ", R2)
+## Coefficient of determination=  0.6510794
+
+#====================================================================================================================
+# I could not get a mixed model to work with pup.first.
+# Problem with singularity that seems to be associated with this variable (because pupwean, for example, works as a lmer)
+pp$pup.birthyearf = as.factor(pp$pup.birthyear)
+pp$momIDf = as.factor(pp$momID)
+mm = lmer(pup.first ~ mom.first  + (1|momIDf)+  (1|pup.birthyearf), pp)  # singular
+mm = lmer(pupwean ~ mom.first  + (1|momIDf)+  (1|pup.birthyearf), pp)  # works
+#====================================================================================================================
+
+
+# --------------------------------------------------
+# select only those mom-pup pairs with the same AFB
+# --------------------------------------------------
+
+ppp = subset(pp, pp$AFB.m == pp$AFB.pup)
+dim(ppp)
+as.data.frame(ppp)
+
+# correlation?
+cor(ppp$pup.first, ppp$mom.first)
+
+#linear model R2?
+summary(lm(ppp$pup.first ~  ppp$mom.first))
+
+AFB3 = subset(ppp, ppp$AFB.m == 3)
+AFB4 = subset(ppp, ppp$AFB.m == 4)
+
+plot(ppp$pup.first, ppp$mom.first, xlim = c(250,330), ylim = c(250,330))
+points(AFB3$pup.first, AFB3$mom.first, pch = 16)
+points(AFB4$pup.first, AFB4$mom.first, pch = 16, col = "blue")
+abline(coef = c(0,1))
+
+ppp = ppp[order(ppp$mom.first),]
+tail(ppp)
+
 #---------------------------------------------------
 # Can I do a bootstrap?
 #---------------------------------------------------
-# First do 1 simulation by hand
 
-# What is the correlation of a random sample (same sample size as above real data)
-rand.pup = sample_n(tags, 216)  
-rand.mom = sample_n(tags, 216)
+# What is the correlation of a random sample (same sample size as above ppp)
+
+tagsAFB3 = subset(tags, tags$AFB == 3)
+tagsAFB4 = subset(tags, tags$AFB == 4)
+
+rand.pup3 = sample_n(tagsAFB3, 54)
+rand.pup4 = sample_n(tagsAFB4, 60)
+rand.pup = rbind(rand.pup3, rand.pup4)
+
+rand.mom3 = sample_n(tagsAFB3, 54)
+rand.mom4 = sample_n(tagsAFB4, 60)
+rand.mom = rbind(rand.mom3, rand.mom4)
 
 # correlation?
 cor(rand.pup$first.breeding.date, rand.mom$first.breeding.date)
@@ -1663,24 +1859,31 @@ output.coef = list()
 output.pvalue = list()
 
 repeats = 1000
-set.seed(101)
+
 # Analysis function
 for(i in 1:repeats){                          
   
-rand.pup = sample_n(tags, 216)
-rand.pup$pup.first = rand.pup$first.breeding.date
-
-rand.mom = sample_n(tags, 216)
-rand.mom$mom.first = rand.mom$first.breeding.date
+  tagsAFB3 = subset(tags, tags$AFB == 3)
+  tagsAFB4 = subset(tags, tags$AFB == 4)
+  
+  rand.pup3 = sample_n(tagsAFB3, 54)
+  rand.pup4 = sample_n(tagsAFB4, 60)
+  rand.pup = rbind(rand.pup3, rand.pup4)
+  rand.pup$pup.first = rand.pup$first.breeding.date
+  
+  rand.mom3 = sample_n(tagsAFB3, 54)
+  rand.mom4 = sample_n(tagsAFB4, 60)
+  rand.mom = rbind(rand.mom3, rand.mom4)
+  rand.mom$mom.first = rand.mom$first.breeding.date
   
   # correlation?
   # temp = cor(rand.pup$first.breeding.date, rand.mom$first.breeding.date)
-
+  
   #linear model R2?
   temp =  lm(rand.pup$first.breeding.date ~  rand.mom$first.breeding.date)
   
-  # plot(rand.pup$first.breeding.date, rand.mom$first.breeding.date,  xlim = c(250,330), ylim = c(250,330))
-  # abline(temp)
+  #   plot(rand.pup$first.breeding.date, rand.mom$first.breeding.date,  xlim = c(250,330), ylim = c(250,330))
+  #  abline(temp)
   
   #  output[[i]] = temp
   
@@ -1698,7 +1901,6 @@ output.coef = unlist(output.coef, use.names=FALSE)
 output.pvalue = unlist(output.pvalue, use.names=FALSE)
 
 mean(output.R2) # mean R2
-median(output.R2) # mean R2
 mean(output.coef) # mean values
 mean(output.pvalue) # mean values
 
@@ -1720,28 +1922,37 @@ hist(output.R2)
 hist(output.coef)
 hist(output.pvalue)
 
+lower95 =quantile(output.coef, c(0.025))
+upper95 = quantile(output.coef, c(0.975))
+
 quantile(output.coef, c(0.025, 0.975))
 quantile(output.pvalue, c(0.025, 0.975))
 
 output.coef = as.data.frame(output.coef)
 # Histogram with density instead of count on y-axis
-ggplot(output.coef, aes(x=output.coef)) + 
+bootplot = ggplot(output.coef, aes(x=output.coef)) + 
   geom_histogram(aes(y=..density..),      
                  bins=50,
-                 colour="black", fill="white")+
- # geom_density(alpha=.2, fill="blue") +
-   gg_theme() +
+                 colour="black", fill="grey")+
+  # geom_density(alpha=.2, fill="blue") +
+  gg_theme() +
   geom_vline(aes(xintercept=lm.fit$coefficients[2]), 
-              color="blue", linetype="dashed", size=1)
+             color="blue", linetype="dashed", size=1)+
+  xlab("Slope coefficient") +
+  ylab("Density") +
+  geom_vline(aes(xintercept=lower95), 
+             color="grey", linetype="dotted", size=1)+
   
-# https://thomasleeper.com/Rcourse/Tutorials/permutationtests.html
-# Our observed data appears to be quite extreme in terms of the distribution of possible 
-# coefficients observable were the outcome random mom-pup pairs. 
-# We can use the distribution to obtain a p-value by counting how many permuted values are 
-# larger than the one we observed in our actual data. 
-#  We can then divide this by the number of items in our permutation distribution:
-sum(output.coef > lm.fit$coefficients[2])/1000  # one-tailed test
+  geom_vline(aes(xintercept=upper95), 
+             color="grey", linetype="dotted", size=1)
 
+bootplot
+
+## Save Plot 
+pdf("./plots/FigureS10.pdf",
+    useDingbats = FALSE, width = 6, height = 5)
+ggdraw(bootplot)
+dev.off()
 
 # ====================================================================
 # - HOW TO DO BOOTSTRAP FROM MOM-PUP PAIRS *SUBSAMPLE MOM-PUP DATA* 
@@ -1794,8 +2005,12 @@ bootresults = as.data.frame(bootresults)
 gg = cbind(output.coef,bootresults)
 names(gg) = c("booot.coef"," booot.results")
 
-gg = gg %>%
+gg = gg%>%
   gather(booot,output.coef)
+
+str(gg)
+
+ggsim = subset(gg, gg$booot == "booot.results")
 
 # Overlaid histograms are created by setting the argument position="identity".
 # We have also set the alpha parameter as alpha=.5 for transparency.
@@ -1804,43 +2019,9 @@ ggplot(gg, aes(x= output.coef, fill= booot)) +
                  bins=50,
                  colour="black",  alpha=0.4, position= "identity")+
   # geom_density(alpha=.2, fill="blue") +
-  geom_vline(aes(xintercept=mean(output.coef)), color="blue", linetype="dashed", size=1)+
+  geom_vline(aes(xintercept=mean(ggsim$output.coef)), color="blue", linetype="dashed", size=1)+
   gg_theme()
 
-# Plot Year random effect
-
-p_y <- lmer(julian ~ moultstd + (moultstd|year.random) , 
-         tags1moult, 
-         REML = T, na.action = "na.fail")
-
-tags1moult$pop.predp_y <- predict(p_y, re.form=NA)  ## population level
-tags1moult$ind.predp_y <- predict(p_y) ## individual level
-
-gg <- ggplot(tags1moult, aes(moultstd, julian)) +
-         geom_line(aes(y = pop.predp_y,  group=year.random), colour="black", size = 1.3, alpha = 1) + 
-         geom_line(aes(y = ind.predp_y,  group=year.random), colour="#4daf4a", size = 0.1, alpha = 0.5) +
-  gg_theme() + 
-  xlab("Moult departure date") +
-  ylab("Breeding arrival date")+
-  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust = 0)) +
-  scale_x_continuous(breaks = x.scale,      # z-standardized scale 
-                     labels =c("01 Nov","15 Nov","01 Dec",	"15 Dec",
-                               "01 Jan","15 Jan","01 Feb",	"15 Feb",	
-                               "01 Mar", "15 Mar"),
-                     limits = c(-4, 3.8)) +
-scale_y_continuous(breaks = c(seq(260,300, by = 10)), 
-                     labels =c("17 Sep","27 Sep","07 Oct","17 Oct","27 Oct"),
-                     limits = c(260, 300)) + 
-        geom_label(aes(x = -3.02, y = 298, label = "1983 - 2016"), fontface = "plain", size = 4.2,
-                  label.size = 0)
-gg
-
-# ## Save Plot 
-# pdf("./plots/2022 random effect slopes_1986_2016.pdf",
-#     useDingbats = FALSE, width = 6, height = 6)
-# print (gg)
-# dev.off()
-# 
 
 #--------------------------------------
 # Model checking
@@ -1848,11 +2029,11 @@ gg
 
 library(performance)
 # checking model assumptions
-dev.new()
+#dev.new()
 
 ## Save Plot 
-# pdf("./plots/FE model diagnostics.pdf",
-#     useDingbats = FALSE, width = 10, height = 6)
+pdf("./plots/FigureS8.pdf",
+   useDingbats = FALSE, width = 10, height = 6)
 
 check_model(best, panel = T, dot_size = 1, alpha = 0.15, line_size = 0.6,
             check = c(#"qq",
@@ -1862,7 +2043,7 @@ check_model(best, panel = T, dot_size = 1, alpha = 0.15, line_size = 0.6,
                      #"pp_check"
                      ))
             
-# dev.off()
+dev.off()
 
 # pdf("./plots/RE model diagnostics.pdf",
 #     useDingbats = FALSE, width = 12, height = 6)
@@ -1956,8 +2137,8 @@ p = p + guides(fill="none")
 #        width = 50, height = 50, dpi = 800, units = 'in', limitsize = T)
 # 
 # ## Save Plot 
-# pdf("./plots/Haulouts.pdf",
-#     useDingbats = FALSE, width = 5, height = 5)
-# print(p)
-# dev.off()
+pdf("./plots/Figure1.pdf",
+     useDingbats = FALSE, width = 5, height = 5)
+ print(p)
+ dev.off()
 

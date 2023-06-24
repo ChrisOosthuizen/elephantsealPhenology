@@ -50,8 +50,8 @@ p.day_lat = ggplot(data = day_lat,
   p.day_lat
 
 ## Save Plot 
-#pdf("./plots/latitude and peak haulout.pdf",
-#    useDingbats = FALSE, width = 6, height = 5)
+pdf("./plots/FigureS1.pdf",
+    useDingbats = FALSE, width = 6, height = 5)
 cowplot::ggdraw(p.day_lat)
-#dev.off()
+dev.off()
 
