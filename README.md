@@ -3,28 +3,15 @@ Code and data for: Oosthuizen WC, Pistorius PA, Bester MN, Altwegg, R, de Bruyn 
 
 This code contains updates (is a live version) of the Dryad version associated with the paper. 
 
-Dataset for Proceedings of the Royal Society B: DOI: 10.1098/rspb.2023-1170.
-Reproductive phenology is a repeatable, heritable trait linked to the timing of other life history events in a migratory marine predator 
-Oosthuizen WC1,2, Pistorius PA2, Bester MN3, Altwegg, R1, de Bruyn PJN3
-1 Centre for Statistics in Ecology, Environment and Conservation, Department of Statistical Sciences, University of Cape Town, Cape Town, South Africa
-2 Marine Apex Predator Research Unit, Institute for Coastal and Marine Research and Department of Zoology, Nelson Mandela University, Gqeberha, South Africa
-3 Mammal Research Institute, Department of Zoology and Entomology, University of Pretoria, Private Bag X20, Hatfield, Pretoria 0028, South Africa
-
-We used mixed models to quantify how reproductive timing varied across 1,755 female southern elephant seals (Mirounga leonina) breeding at Marion Island in the Southern Ocean (1989 - 2019), 
-and to identify the factors that correlate with phenological shifts within- and between individuals. We found strong support for covariation in the timing of breeding arrival dates and the timing of the preceding moult. 
-Breeding arrival dates were more repeatable at the individual-level, as compared to the population-level, even after accounting for individual traits (wean date as a pup, age and breeding experience) 
-associated with phenological variability. Mother-daughter similarities in breeding phenology were also evident, indicating that additive genetic effects may contribute to between-individual variation in breeding phenology. 
-Over 30 years, elephant seal phenology did not change towards earlier or later dates, and we found no correlation between annual fluctuations in phenology and indices of environmental variation. 
+We used mixed models to quantify how reproductive timing varied across 1,755 female southern elephant seals (Mirounga leonina) breeding at Marion Island in the Southern Ocean (1989 - 2019), and to identify the factors that correlate with phenological shifts within- and between individuals. We found strong support for covariation in the timing of breeding arrival dates and the timing of the preceding moult. Breeding arrival dates were more repeatable at the individual-level, as compared to the population-level, even after accounting for individual traits (wean date as a pup, age and breeding experience) associated with phenological variability. Mother-daughter similarities in breeding phenology were also evident, indicating that additive genetic effects may contribute to between-individual variation in breeding phenology. Over 30 years, elephant seal phenology did not change towards earlier or later dates, and we found no correlation between annual fluctuations in phenology and indices of environmental variation. 
 
 ## Sharing/Access information
 
-This long-term data will be best used in collaboration with the authors, given their knowledge of how the data were collected. 
-Please contact us to collaborate if you are interested in using this data for further work.  
+This long-term data will be best used in collaboration with the authors, given their knowledge of how the data were collected. Please contact us to collaborate if you are interested in using this data for further work.  
 
 ## Code/Software
 
-Analyses were conducted in R (v4.1.3 and later versions) (R Core Team. 2022). Analysis can be replicated using:
-OosthuizenWC_ProceedingsB2023-1170_all code.
+Analyses were conducted in R (v4.1.3 and later versions) (R Core Team. 2022). Analysis can be replicated using: OosthuizenWC_ProceedingsB2023-1170_all code.
 
 utils::sessionInfo()
 R version 4.2.1 (2022-06-23 ucrt)
